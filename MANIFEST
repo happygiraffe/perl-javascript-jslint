@@ -1,7 +1,9 @@
 bin/jslint
+Build.PL
 Changes
 lib/JavaScript/Lint.pm
 Makefile.PL
 MANIFEST
+META.yml
 README
 t/JavaScript-Lint.t
