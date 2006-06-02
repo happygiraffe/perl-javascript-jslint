@@ -3,7 +3,7 @@
 use strict;
 
 use Data::Dumper;
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 BEGIN {
     use_ok( 'JavaScript::Lint' );
@@ -25,6 +25,33 @@ my @tests = (
             {
                 'character' => 13,
                 'evidence'  => 'var two = 1+1',
+                'id'        => '(error)',
+                'line'      => 0,
+                'reason'    => "Missing ';'"
+            }
+        ],
+    },
+    {
+        name   => 'missing semicolon and late declaration',
+        js     => 'two = 1+1;var two',
+        errors => [
+            {
+                'character' => 14,
+                'evidence'  => 'two = 1+1;var two',
+                'id'        => '(error)',
+                'line'      => 0,
+                'reason'    => 'Var two was used before it was declared.'
+            },
+            {
+                'character' => 14,
+                'evidence'  => 'two = 1+1;var two',
+                'id'        => '(error)',
+                'line'      => 0,
+                'reason'    => "Identifier 'two' already declared as global"
+            },
+            {
+                'character' => 17,
+                'evidence'  => 'two = 1+1;var two',
                 'id'        => '(error)',
                 'line'      => 0,
                 'reason'    => "Missing ';'"
