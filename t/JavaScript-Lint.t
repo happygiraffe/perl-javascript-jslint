@@ -23,10 +23,10 @@ my @tests = (
         js     => 'var two = 1+1',
         errors => [
             {
-                'character' => 13,
+                'character' => 14,
                 'evidence'  => 'var two = 1+1',
                 'id'        => '(error)',
-                'line'      => 0,
+                'line'      => 1,
                 'reason'    => "Missing ';'"
             }
         ],
@@ -36,24 +36,24 @@ my @tests = (
         js     => 'two = 1+1;var two',
         errors => [
             {
-                'character' => 14,
+                'character' => 15,
                 'evidence'  => 'two = 1+1;var two',
                 'id'        => '(error)',
-                'line'      => 0,
+                'line'      => 1,
                 'reason'    => 'Var two was used before it was declared.'
             },
             {
-                'character' => 14,
+                'character' => 15,
                 'evidence'  => 'two = 1+1;var two',
                 'id'        => '(error)',
-                'line'      => 0,
+                'line'      => 1,
                 'reason'    => "Identifier 'two' already declared as global"
             },
             {
-                'character' => 17,
+                'character' => 18,
                 'evidence'  => 'two = 1+1;var two',
                 'id'        => '(error)',
-                'line'      => 0,
+                'line'      => 1,
                 'reason'    => "Missing ';'"
             }
         ],

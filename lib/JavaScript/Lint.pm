@@ -25,6 +25,16 @@ our $VERSION = '0.01';
     }
 }
 
+# Make them all one-based as would be expected.
+sub fix_line_and_char_numbers {
+    my ( $err ) = @_;
+    my %new_err;
+    @new_err{keys %$err} = values %$err;
+    $new_err{line}++;
+    $new_err{character}++;
+    return \%new_err;
+}
+
 sub jslint {
     my ( $js_source ) = @_;
     croak "usage: jslint(js_source)" unless $js_source;
@@ -33,7 +43,9 @@ sub jslint {
         return;
     }
     else {
-        return @{ $ctx->eval( "jslint.errors" ) };
+        return
+            map { fix_line_and_char_numbers( $_ ) }
+            @{ $ctx->eval( "jslint.errors" ) };
     }
 }
 
@@ -79,7 +91,7 @@ The category of error.
 
 =item I<line>
 
-The line number of the error, starting at zero.
+The line number of the error.
 
 =item I<character>
 
