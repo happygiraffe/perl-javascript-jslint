@@ -10,4 +10,5 @@ WriteMakefile(
     PREREQ_PM     => { JavaScript => 0, },
     ABSTRACT_FROM => 'lib/JavaScript/Lint.pm',
     AUTHOR        => 'Dominic Mitchell <dom@happygiraffe.net>',
+    EXE_FILES     => ['bin/jslint'],
 );
