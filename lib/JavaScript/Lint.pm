@@ -1,3 +1,5 @@
+# @(#) $Id$
+
 package JavaScript::Lint;
 
 use strict;
