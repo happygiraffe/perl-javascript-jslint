@@ -1,0 +1,104 @@
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
+
+use JavaScript::Lint;
+
+sub slurp {
+    my ( $file ) = @_;
+    return do { local $/; <STDIN> } if $file eq '-';
+
+    open my $fh, '<', $file or die "open($file): $!\n";
+    my $contents = do { local $/; <$fh> };
+    close $fh;
+    return $contents;
+}
+
+sub lint_file {
+    my ( $file ) = @_;
+    my $src      = slurp( $file );
+    my @errors   = jslint( $src );
+    if ( @errors ) {
+        foreach ( @errors ) {
+            print join( ':',
+                $file,
+                $_->{ line },
+                $_->{ character },
+                $_->{ reason } ),
+                "\n";
+        }
+    }
+    return scalar @errors;
+}
+
+# Read STDIN unless args present.
+@ARGV = ( '-' ) unless @ARGV;
+
+exit !grep { lint_file( $_ ) } @ARGV;
+
+__END__
+
+=head1 NAME
+
+jslint - Check a file for JavaScript errors
+
+=head1 SYNOPSIS
+
+  jslint [file.js]
+
+=head1 DESCRIPTION
+
+B<jslint> will check a file (or stdin) for JavaScript errors.  All
+errors are printed on stdout and include:
+
+=over 4
+
+=item the filename
+
+=item the line number
+
+=item the column number
+
+=item the error
+
+=back
+
+B<NB>: You can also pass in HTML files and any JavaScript found inside
+will be checked instead.
+
+=head1 SEE ALSO
+
+L<JavaScript::Lint>
+
+=head1 AUTHOR
+
+Dominic Mitchell E<lt>cpan (at) happygiraffe.netE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2006 by Dominic Mitchell
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL AUTHOR OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+
+=cut

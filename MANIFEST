@@ -1,0 +1,7 @@
+bin/jslint
+Changes
+lib/JavaScript/Lint.pm
+Makefile.PL
+MANIFEST
+README
+t/JavaScript-Lint.t
