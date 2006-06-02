@@ -3,7 +3,7 @@
 use strict;
 
 use Data::Dumper;
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 BEGIN {
     use_ok( 'JavaScript::Lint' );
@@ -58,6 +58,21 @@ my @tests = (
             }
         ],
     },
+    {
+        # I think this may actually be exposing a bug in jslint.js, as
+        # it returns a null value in the errors list...
+        name   => 'nested comment, like prototype.js',
+        js     => "/* nested\n/* comment */",
+        errors => [
+            {
+                'character' => 1,
+                'evidence'  => '/* nested',
+                'id'        => '(error)',
+                'line'      => 1,
+                'reason'    => 'Nested comment.'
+            }
+        ],
+    }
 );
 
 foreach my $t ( @tests ) {

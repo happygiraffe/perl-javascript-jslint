@@ -47,6 +47,8 @@ sub jslint {
     else {
         return
             map { fix_line_and_char_numbers( $_ ) }
+            # Sometimes we're getting back nulls...
+            grep { ref($_) eq 'HASH' }
             @{ $ctx->eval( "jslint.errors" ) };
     }
 }
