@@ -8,11 +8,13 @@ use File::Basename;
 use Getopt::Long;
 use JavaScript::Lint;
 
+my $me = basename $0;
+
 sub slurp {
     my ( $file ) = @_;
     return do { local $/; <STDIN> } if $file eq '-';
 
-    open my $fh, '<', $file or die "open($file): $!\n";
+    open my $fh, '<', $file or die "$me: open($file): $!\n";
     my $contents = do { local $/; <$fh> };
     close $fh;
     return $contents;
@@ -48,16 +50,21 @@ my %all_options = (
 );
 
 sub usage {
-    my $me  = basename $0;
     my $msg = "usage: $me [--options] [file.js ...]\n";
     $msg .= sprintf( "  --%-08s \t%s\n", $_, $all_options{ $_ } )
       foreach sort keys %all_options;
     die $msg;
 }
 
+sub version {
+    print "$me $JavaScript::Lint::VERSION\n";
+    exit 0;
+}
+
 my %opts;
-GetOptions( \%opts, 'help', map { "$_!" } sort keys %all_options );
+GetOptions( \%opts, 'help', 'version', map { "$_!" } sort keys %all_options );
 usage if $opts{ help };
+version if $opts{ version };
 
 # Read STDIN unless args present.
 @ARGV = ( '-' ) unless @ARGV;
