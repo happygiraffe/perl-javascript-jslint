@@ -4,6 +4,8 @@
 use strict;
 use warnings;
 
+use File::Basename;
+use Getopt::Long;
 use JavaScript::Lint;
 
 sub slurp {
@@ -17,9 +19,9 @@ sub slurp {
 }
 
 sub lint_file {
-    my ( $file ) = @_;
-    my $src      = slurp( $file );
-    my @errors   = jslint( $src );
+    my ( $file, %opts ) = @_;
+    my $src = slurp( $file );
+    my @errors = jslint( $src, %opts );
     if ( @errors ) {
         foreach ( @errors ) {
             print join( ':',
@@ -27,16 +29,40 @@ sub lint_file {
                 $_->{ line },
                 $_->{ character },
                 $_->{ reason } ),
-                "\n";
+              "\n";
         }
     }
     return scalar @errors;
 }
 
+my %all_options = (
+    browser    => 'the standard browser globals should be predefined',
+    cap        => 'upper case HTML should be allowed',
+    debug      => 'debugger statements should be allowed',
+    evil       => 'eval should be allowed',
+    jscript    => 'jscript deviations should be allowed',
+    laxLineEnd => 'line breaks should not be checked',
+    passfail   => 'the scan should stop on first error',
+    plusplus   => 'post increment should not be allowed',
+    undef      => 'undefined variables are errors',
+);
+
+sub usage {
+    my $me  = basename $0;
+    my $msg = "usage: $me [--options] [file.js ...]\n";
+    $msg .= sprintf( "  --%-08s \t%s\n", $_, $all_options{ $_ } )
+      foreach sort keys %all_options;
+    die $msg;
+}
+
+my %opts;
+GetOptions( \%opts, 'help', map { "$_!" } sort keys %all_options );
+usage if $opts{ help };
+
 # Read STDIN unless args present.
 @ARGV = ( '-' ) unless @ARGV;
 
-exit !grep { lint_file( $_ ) } @ARGV;
+exit !grep { lint_file( $_, %opts ) } @ARGV;
 
 __END__
 
@@ -46,7 +72,7 @@ jslint - Check a file for JavaScript errors
 
 =head1 SYNOPSIS
 
-  jslint [file.js]
+  jslint [--options] [file.js]
 
 =head1 DESCRIPTION
 
@@ -67,6 +93,50 @@ errors are printed on stdout and include:
 
 B<NB>: You can also pass in HTML files and any JavaScript found inside
 will be checked instead.
+
+=head2 OPTIONS
+
+All options are disabled by default.
+
+=over 4
+
+=item --browser
+
+The standard browser globals should be predefined.
+
+=item --cap
+
+Upper case HTML should be allowed.
+
+=item --debug
+
+Debugger statements should be allowed.
+
+=item --evil
+
+Eval should be allowed.
+
+=item --jscript
+
+Jscript deviations should be allowed.
+
+=item --laxLineEnd
+
+Line breaks should not be checked.
+
+=item --passfail
+
+The scan should stop on first error.
+
+=item --plusplus
+
+Post increment should not be allowed.
+
+=item --undef
+
+Undefined variables are errors
+
+=back
 
 =head1 SEE ALSO
 
