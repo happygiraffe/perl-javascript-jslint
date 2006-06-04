@@ -46,10 +46,10 @@ sub make_fatal_error {
 }
 
 sub jslint {
-    my ( $js_source ) = @_;
+    my ( $js_source, %opt ) = @_;
     croak "usage: jslint(js_source)" unless $js_source;
     my $ctx = get_context();
-    if ( $ctx->call( 'jslint', $js_source ) ) {
+    if ( $ctx->call( 'jslint', $js_source, \%opt ) ) {
         return;
     }
     else {
@@ -91,9 +91,9 @@ You may be more interested in the command line interface, L<jslint>.
 
 =item jslint()
 
-This takes one parameter: a string containing JavaScript code.  It
-returns a list of errors.  If there are no problems, an empty list
-will be returned.  Each error is a hash reference containing these keys:
+This takes one mandatory parameter: a string containing JavaScript code.
+It returns a list of errors. If there are no problems, an empty list will
+be returned. Each error is a hash reference containing these keys:
 
 =over 4
 
@@ -122,6 +122,48 @@ A copy of the line of code that produced the error.
 In addition to pure JavaScript, you can also pass in a piece of HTML
 code.  This will be parsed and any JavaScript found within will be
 checked in the usual manner.
+
+You can optionally pass in a second parameter to influence how JSLint works.
+The following keys are used.  All take a boolean value, and each one is false
+by default.
+
+=over 4
+
+=item I<browser>
+
+Predefine the standard browser global variables.
+
+=item I<cap>
+
+Allow upper case HTML.
+
+=item I<debug>
+
+Allow B<debugger> statements.
+
+=item I<evil>
+
+Allow use of B<eval>.
+
+=item I<jscript>
+
+Allow JScript deviations.
+
+=item I<laxLineEnd>
+
+Don't check line breaks.
+
+=item I<passfail>
+
+Stop on the first error.
+
+=item I<plusplus>
+
+Disallow post-increment expressions.
+
+=item I<undef>
+
+Report on variables that are undefined when they are first used.
 
 =back
 
