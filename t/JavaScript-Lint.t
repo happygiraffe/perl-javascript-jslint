@@ -3,7 +3,7 @@
 use strict;
 
 use Data::Dumper;
-use Test::More tests => 10;
+use Test::More tests => 12;
 
 BEGIN {
     use_ok( 'JavaScript::Lint' );
@@ -114,6 +114,18 @@ my @tests = (
         name   => 'random options allowed',
         js     => 'alert(42);',
         opts   => { xyzzy => 1 },
+        errors => [],
+    },
+    {
+        name   => 'embedded html',
+        js     => '<html><head><script type="text/javascript">alert(42);</script></head></html>',
+        opts   => {},
+        errors => [],
+    },
+    {
+        name   => 'embedded html in attribute',
+        js     => '<html><body><a onclick="alert(42);">click here</a></body></html>',
+        opts   => {},
         errors => [],
     },
 );

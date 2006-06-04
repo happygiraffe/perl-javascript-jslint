@@ -122,7 +122,8 @@ A copy of the line of code that produced the error.
 
 In addition to pure JavaScript, you can also pass in a piece of HTML
 code.  This will be parsed and any JavaScript found within will be
-checked in the usual manner.
+checked in the usual manner.  The HTML code must be a full web page,
+i.e. start with C<< <html> >>.
 
 You can optionally pass in a second parameter to influence how JSLint works.
 The following keys are used.  All take a boolean value, and each one is false
