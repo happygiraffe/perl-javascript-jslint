@@ -3,7 +3,7 @@
 use strict;
 
 use Data::Dumper;
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 BEGIN {
     use_ok( 'JavaScript::Lint' );
@@ -14,10 +14,16 @@ like( $@, qr/usage/, 'jslint() provokes usage message' );
 
 my @tests = (
     {
-        name   => 'basic',
-        js     => 'var two = 1+1;',
+        name   => 'empty',
+        js     => '',
         opts   => {},
         errors => [],
+    },
+    {
+        name     => 'basic',
+          js     => 'var two = 1+1;',
+          opts   => {},
+          errors => [],
     },
     {
         name   => 'missing semicolon',

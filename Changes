@@ -1,5 +1,8 @@
 Revision history for Perl extension JavaScript::Lint.
 
+0.03  Sun Jun  4 11:42:08 BST 2006
+    - Urgh.  Allow an empty string to be linted correctly.
+
 0.02  Sun Jun  4 10:20:13 BST 2006
     - Turn a fatal error into something more readable.  It happens that I
       missed a comment in the JSLint source pointing out that it returned

@@ -47,7 +47,8 @@ sub make_fatal_error {
 
 sub jslint {
     my ( $js_source, %opt ) = @_;
-    croak "usage: jslint(js_source)" unless $js_source;
+    croak "usage: jslint(js_source)"
+      unless defined $js_source;
     my $ctx = get_context();
     if ( $ctx->call( 'jslint', $js_source, \%opt ) ) {
         return;
