@@ -92,7 +92,7 @@ You may be more interested in the command line interface, L<jslint>.
 =item jslint()
 
 This takes one parameter: a string containing JavaScript code.  It
-returns a list of errors.  If there are no problems, the empty list
+returns a list of errors.  If there are no problems, an empty list
 will be returned.  Each error is a hash reference containing these keys:
 
 =over 4
