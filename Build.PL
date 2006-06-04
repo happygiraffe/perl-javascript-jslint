@@ -12,8 +12,8 @@ Module::Build->new(
     create_makefile_pl => 'passthrough',
     add_to_cleanup     => ['JavaScript-Lint-*'],
     requires           => {
-        File::Basename => 0,
-        Getopt::Long   => 0,
-        JavaScript     => 0,
+        'File::Basename' => 0,
+        'Getopt::Long'   => 0,
+        'JavaScript'     => 0,
     },
 )->create_build_script;
