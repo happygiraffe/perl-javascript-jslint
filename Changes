@@ -1,5 +1,10 @@
 Revision history for Perl extension JavaScript::Lint.
 
+0.02  Sun Jun  4 10:20:13 BST 2006
+    - Turn a fatal error into something more readable.  It happens that I
+      missed a comment in the JSLint source pointing out that it returned
+      nulls...
+
 0.01  Fri Jun  2 14:07:53 2006
 	- original version; created by h2xs 1.23 with options
 		-AX -n JavaScript::Lint

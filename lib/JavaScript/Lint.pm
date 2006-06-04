@@ -31,10 +31,18 @@ our $VERSION = '0.01';
 sub fix_line_and_char_numbers {
     my ( $err ) = @_;
     my %new_err;
-    @new_err{keys %$err} = values %$err;
-    $new_err{line}++;
-    $new_err{character}++;
+    @new_err{ keys %$err } = values %$err;
+    $new_err{ line }++;
+    $new_err{ character }++;
     return \%new_err;
+}
+
+sub make_fatal_error {
+    my ( $err ) = @_;
+    my %newerr = %$err;
+    $newerr{ id }     = '(fatal)';
+    $newerr{ reason } = 'Cannot proceed.';
+    return \%newerr;
 }
 
 sub jslint {
@@ -45,11 +53,11 @@ sub jslint {
         return;
     }
     else {
-        return
-            map { fix_line_and_char_numbers( $_ ) }
-            # Sometimes we're getting back nulls...
-            grep { ref($_) eq 'HASH' }
-            @{ $ctx->eval( "jslint.errors" ) };
+        my @errors = @{ $ctx->eval( "jslint.errors" ) };
+        if ( !defined $errors[-1] ) {
+            $errors[-1] = make_fatal_error( $errors[-2] );
+        }
+        return map { fix_line_and_char_numbers( $_ ) } @errors;
     }
 }
 

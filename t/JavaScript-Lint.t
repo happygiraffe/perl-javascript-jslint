@@ -59,8 +59,6 @@ my @tests = (
         ],
     },
     {
-        # I think this may actually be exposing a bug in jslint.js, as
-        # it returns a null value in the errors list...
         name   => 'nested comment, like prototype.js',
         js     => "/* nested\n/* comment */",
         errors => [
@@ -70,6 +68,15 @@ my @tests = (
                 'id'        => '(error)',
                 'line'      => 1,
                 'reason'    => 'Nested comment.'
+            },
+            {
+                # character, line, evidence should all be copied from previous
+                # err.
+                'character' => 1,
+                'evidence'  => '/* nested',
+                'id'        => '(fatal)',
+                'line'      => 1,
+                'reason'    => 'Cannot proceed.'
             }
         ],
     }
@@ -78,9 +85,9 @@ my @tests = (
 foreach my $t ( @tests ) {
     my @got = jslint( $t->{ js } );
     is_deeply( \@got, $t->{ errors }, $t->{ name } )
-        or diag(
+      or diag(
         Data::Dumper->new( [ \@got ], ['*errors'] )->Indent( 1 )->Sortkeys( 1 )
-            ->Dump );
+          ->Dump );
 }
 
 # vim: set ai et sw=4 syntax=perl :
