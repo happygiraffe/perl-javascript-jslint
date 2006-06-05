@@ -62,7 +62,8 @@ sub version {
 }
 
 my %opts;
-GetOptions( \%opts, 'help', 'version', map { "$_!" } sort keys %all_options );
+GetOptions( \%opts, 'help', 'version', map { "$_!" } sort keys %all_options )
+    or usage;
 usage   if $opts{ help };
 version if $opts{ version };
 

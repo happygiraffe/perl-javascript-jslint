@@ -4,6 +4,7 @@ Revision history for Perl extension JavaScript::Lint.
     - Renamed to JavaScript::JSLint to more accurately reflect the underlying
       software in use.
     - Added more tests/docs for the HTML side of things.
+    - Stop after invalid options in bin/jslint.
 
 0.03  Sun Jun  4 11:42:08 BST 2006
     - Urgh.  Allow an empty string to be linted correctly.
