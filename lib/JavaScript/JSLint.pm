@@ -177,6 +177,9 @@ L<JavaScript> for more details on the Perl / JavaScript bridge.
 
 L<jslint> for the command line interface.
 
+L<http://www.javascriptlint.com/> is an alternative implementation of a
+JavaScript lint tool.
+
 =head1 AUTHOR
 
 Dominic Mitchell, E<lt>cpan (at) happygiraffe.netE<gt>
