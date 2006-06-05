@@ -1,5 +1,9 @@
 Revision history for Perl extension JavaScript::Lint.
 
+0.04  Mon Jun  5 21:25:57 BST 2006
+    - Renamed to JavaScript::JSLint to more accurately reflect the underlying
+      software in use.
+
 0.03  Sun Jun  4 11:42:08 BST 2006
     - Urgh.  Allow an empty string to be linted correctly.
     - Ensure the correct exit code comes out of the jslint command line tool.

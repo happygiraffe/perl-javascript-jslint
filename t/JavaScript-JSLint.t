@@ -6,7 +6,7 @@ use Data::Dumper;
 use Test::More tests => 12;
 
 BEGIN {
-    use_ok( 'JavaScript::Lint' );
+    use_ok( 'JavaScript::JSLint' );
 }
 
 eval { jslint() };

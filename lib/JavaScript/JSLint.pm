@@ -1,6 +1,6 @@
 # @(#) $Id$
 
-package JavaScript::Lint;
+package JavaScript::JSLint;
 
 use strict;
 use warnings;
@@ -66,11 +66,11 @@ sub jslint {
 
 =head1 NAME
 
-JavaScript::Lint - Check JavaScript code for problems
+JavaScript::JSLint - Check JavaScript code for problems
 
 =head1 SYNOPSIS
 
-  use JavaScript::Lint;
+  use JavaScript::JSLint;
   
   my @errors = jslint( $javascript );
   foreach my $err (@errors) {
@@ -79,7 +79,7 @@ JavaScript::Lint - Check JavaScript code for problems
 
 =head1 DESCRIPTION
 
-JavaScript::Lint is a tool for checking for common problems in
+JavaScript::JSLint is a tool for checking for common problems in
 JavaScript code.  It's based on Douglas Crockford's jslint.  Full
 documentation on the conditions that it detects is at
 L<http://jslint.com/lint.html>.

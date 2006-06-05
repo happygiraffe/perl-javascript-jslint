@@ -6,7 +6,7 @@ use warnings;
 
 use File::Basename;
 use Getopt::Long;
-use JavaScript::Lint;
+use JavaScript::JSLint;
 
 my $me = basename $0;
 
@@ -57,7 +57,7 @@ sub usage {
 }
 
 sub version {
-    print "$me $JavaScript::Lint::VERSION\n";
+    print "$me $JavaScript::JSLint::VERSION\n";
     exit 0;
 }
 
@@ -148,7 +148,7 @@ Undefined variables are errors
 
 =head1 SEE ALSO
 
-L<JavaScript::Lint>
+L<JavaScript::JSLint>
 
 =head1 AUTHOR
 

@@ -1,5 +1,5 @@
-JavaScript-Lint
-===============
+JavaScript-JSLint
+=================
 
 JavaScript::Lint is a small wrapper around Douglas Crockford's wonderful
 jslint tool.  It provides not only a convenient command line interface,
