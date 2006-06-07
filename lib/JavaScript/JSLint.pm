@@ -18,7 +18,7 @@ our $VERSION = '0.04';
     my $ctx;
     my $jslint_source = do { local $/; <DATA> };
 
-    sub get_context {
+    sub _get_context {
         unless ( $ctx ) {
             $ctx = JavaScript::Runtime->new()->create_context();
             $ctx->eval( $jslint_source );
@@ -28,7 +28,7 @@ our $VERSION = '0.04';
 }
 
 # Make them all one-based as would be expected.
-sub fix_line_and_char_numbers {
+sub _fix_line_and_char_numbers {
     my ( $err ) = @_;
     my %new_err;
     @new_err{ keys %$err } = values %$err;
@@ -37,7 +37,7 @@ sub fix_line_and_char_numbers {
     return \%new_err;
 }
 
-sub make_fatal_error {
+sub _make_fatal_error {
     my ( $err ) = @_;
     my %newerr = %$err;
     $newerr{ id }     = '(fatal)';
@@ -49,16 +49,16 @@ sub jslint {
     my ( $js_source, %opt ) = @_;
     croak "usage: jslint(js_source)"
       unless defined $js_source;
-    my $ctx = get_context();
+    my $ctx = _get_context();
     if ( $ctx->call( 'jslint', $js_source, \%opt ) ) {
         return;
     }
     else {
         my @errors = @{ $ctx->eval( "jslint.errors" ) };
         if ( !defined $errors[-1] ) {
-            $errors[-1] = make_fatal_error( $errors[-2] );
+            $errors[-1] = _make_fatal_error( $errors[-2] );
         }
-        return map { fix_line_and_char_numbers( $_ ) } @errors;
+        return map { _fix_line_and_char_numbers( $_ ) } @errors;
     }
 }
 
@@ -166,6 +166,8 @@ Disallow post-increment expressions.
 =item I<undef>
 
 Report on variables that are undefined when they are first used.
+
+=back
 
 =back
 
