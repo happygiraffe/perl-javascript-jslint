@@ -12,7 +12,7 @@ use base qw( Exporter );
 
 our @EXPORT = qw( jslint );
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 {
     my $ctx;
