@@ -55,7 +55,7 @@ sub jslint {
     }
     else {
         my @errors = @{ $ctx->eval( "jslint.errors" ) };
-        if ( !defined $errors[-1] ) {
+        if ( @errors >= 2 && !defined $errors[-1] ) {
             $errors[-1] = _make_fatal_error( $errors[-2] );
         }
         return map { _fix_line_and_char_numbers( $_ ) } @errors;
