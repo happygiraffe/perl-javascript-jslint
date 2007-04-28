@@ -94,7 +94,7 @@ JavaScript::JSLint - Check JavaScript code for problems
 
   use JavaScript::JSLint;
   
-  my @errors = jslint( $javascript );
+  my @errors = jslint( $javascript, white => 1 );
   foreach my $err (@errors) {
     print "$err->{reason} at line $err->{line}\n";
   }
@@ -153,41 +153,61 @@ by default.
 
 =over 4
 
+=item I<bitwise>
+
+true if bitwise operators should not be allowed
+
 =item I<browser>
 
-Predefine the standard browser global variables.
+true if the standard browser globals should be predefined
 
 =item I<cap>
 
-Allow upper case HTML.
+true if upper case HTML should be allowed
 
 =item I<debug>
 
-Allow B<debugger> statements.
+true if debugger statements should be allowed
+
+=item I<eqeqeq>
+
+true if === should be required
 
 =item I<evil>
 
-Allow use of B<eval>.
+true if eval should be allowed
 
-=item I<jscript>
+=item I<laxbreak>
 
-Allow JScript deviations.
+true if line breaks should not be checked
 
-=item I<laxLineEnd>
+=item I<nomen>
 
-Don't check line breaks.
+true if names should be checked
 
 =item I<passfail>
 
-Stop on the first error.
+true if the scan should stop on first error
 
 =item I<plusplus>
 
-Disallow post-increment expressions.
+true if increment/decrement should not be allowed
+
+=item I<rhino>
+
+true if the Rhino environment globals should be predefined
 
 =item I<undef>
 
-Report on variables that are undefined when they are first used.
+true if undefined variables are errors
+
+=item I<white>
+
+true if strict whitespace rules apply
+
+=item I<widget>
+
+true if the Yahoo Widgets globals should be predefined
 
 =back
 

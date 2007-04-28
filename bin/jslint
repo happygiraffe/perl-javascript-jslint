@@ -99,41 +99,65 @@ All options are disabled by default.
 
 =over 4
 
+=item --adsafe
+
+use of some browser features should be restricted.
+
+=item --bitwise
+
+bitwise operators should not be allowed.
+
 =item --browser
 
-The standard browser globals should be predefined.
+the standard browser globals should be predefined.
 
 =item --cap
 
-Upper case HTML should be allowed.
+upper case HTML should be allowed.
 
 =item --debug
 
-Debugger statements should be allowed.
+debugger statements should be allowed.
+
+=item --eqeqeq
+
+should be required.
 
 =item --evil
 
-Eval should be allowed.
+eval should be allowed.
 
-=item --jscript
+=item --laxbreak
 
-Jscript deviations should be allowed.
+line breaks should not be checked.
 
-=item --laxLineEnd
+=item --nomen
 
-Line breaks should not be checked.
+names should be checked.
 
 =item --passfail
 
-The scan should stop on first error.
+the scan should stop on first error.
 
 =item --plusplus
 
-Post increment should not be allowed.
+increment/decrement should not be allowed.
+
+=item --rhino
+
+the Rhino environment globals should be predefined.
 
 =item --undef
 
-Undefined variables are errors
+undefined variables are errors.
+
+=item --white
+
+strict whitespace rules apply.
+
+=item --widget
+
+the Yahoo Widgets globals should be predefined.
 
 =back
 
