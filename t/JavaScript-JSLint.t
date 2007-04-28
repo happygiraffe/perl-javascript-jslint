@@ -52,19 +52,12 @@ my @tests = (
                 'reason'    => 'Var two was used before it was declared.'
             },
             {
-                'character' => 15,
-                'evidence'  => 'two = 1+1;var two',
-                'id'        => '(error)',
-                'line'      => 1,
-                'reason'    => "Identifier 'two' already declared as global"
-            },
-            {
                 'character' => 18,
                 'evidence'  => 'two = 1+1;var two',
                 'id'        => '(error)',
                 'line'      => 1,
-                'reason'    => "Missing ';'"
-            }
+                'reason'    => "Missing ';'",
+            },
         ],
     },
     {
@@ -84,9 +77,9 @@ my @tests = (
                 # err.
                 'character' => 1,
                 'evidence'  => '/* nested',
-                'id'        => '(fatal)',
+                'id'        => '(error)',
                 'line'      => 1,
-                'reason'    => 'Cannot proceed.'
+                'reason'    => 'Stopping, unable to continue. (0% scanned)'
             }
         ],
     },
@@ -106,7 +99,7 @@ my @tests = (
                 'evidence'  => 'alert(42);',
                 'id'        => '(error)',
                 'line'      => 1,
-                'reason'    => 'Undefined variable: alert',
+                'reason'    => 'Undefined function: alert',
             }
         ],
     },

@@ -38,15 +38,21 @@ sub lint_file {
 }
 
 my %all_options = (
-    browser    => 'the standard browser globals should be predefined',
-    cap        => 'upper case HTML should be allowed',
-    debug      => 'debugger statements should be allowed',
-    evil       => 'eval should be allowed',
-    jscript    => 'jscript deviations should be allowed',
-    laxLineEnd => 'line breaks should not be checked',
-    passfail   => 'the scan should stop on first error',
-    plusplus   => 'post increment should not be allowed',
-    undef      => 'undefined variables are errors',
+    adsafe   => 'use of some browser features should be restricted',
+    bitwise  => 'bitwise operators should not be allowed',
+    browser  => 'the standard browser globals should be predefined',
+    cap      => 'upper case HTML should be allowed',
+    debug    => 'debugger statements should be allowed',
+    eqeqeq   => '=== should be required',
+    evil     => 'eval should be allowed',
+    laxbreak => 'line breaks should not be checked',
+    nomen    => 'names should be checked',
+    passfail => 'the scan should stop on first error',
+    plusplus => 'increment/decrement should not be allowed',
+    rhino    => 'the Rhino environment globals should be predefined',
+    undef    => 'undefined variables are errors',
+    white    => 'strict whitespace rules apply',
+    widget   => 'the Yahoo Widgets globals should be predefined',
 );
 
 sub usage {
