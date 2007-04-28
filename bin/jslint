@@ -6,7 +6,7 @@ use warnings;
 
 use File::Basename;
 use Getopt::Long;
-use JavaScript::JSLint;
+use JavaScript::JSLint qw( jslint jslint_options );
 
 my $me = basename $0;
 
@@ -37,23 +37,7 @@ sub lint_file {
     return scalar @errors;
 }
 
-my %all_options = (
-    adsafe   => 'use of some browser features should be restricted',
-    bitwise  => 'bitwise operators should not be allowed',
-    browser  => 'the standard browser globals should be predefined',
-    cap      => 'upper case HTML should be allowed',
-    debug    => 'debugger statements should be allowed',
-    eqeqeq   => '=== should be required',
-    evil     => 'eval should be allowed',
-    laxbreak => 'line breaks should not be checked',
-    nomen    => 'names should be checked',
-    passfail => 'the scan should stop on first error',
-    plusplus => 'increment/decrement should not be allowed',
-    rhino    => 'the Rhino environment globals should be predefined',
-    undef    => 'undefined variables are errors',
-    white    => 'strict whitespace rules apply',
-    widget   => 'the Yahoo Widgets globals should be predefined',
-);
+my %all_options = jslint_options();
 
 sub usage {
     my $msg = "usage: $me [--options] [file.js ...]\n";

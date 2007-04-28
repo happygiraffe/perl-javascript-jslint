@@ -11,6 +11,7 @@ use JavaScript;
 use base qw( Exporter );
 
 our @EXPORT = qw( jslint );
+our @EXPORT_OK = qw( jslint jslint_options );
 
 our $VERSION = '0.05';
 
@@ -60,6 +61,27 @@ sub jslint {
         pop @errors if !defined $errors[-1];
         return map { _fix_line_and_char_numbers( $_ ) } @errors;
     }
+}
+
+# TODO: generate this list by parsing the source below.
+sub jslint_options {
+    return (
+        adsafe   => 'use of some browser features should be restricted',
+        bitwise  => 'bitwise operators should not be allowed',
+        browser  => 'the standard browser globals should be predefined',
+        cap      => 'upper case HTML should be allowed',
+        debug    => 'debugger statements should be allowed',
+        eqeqeq   => '=== should be required',
+        evil     => 'eval should be allowed',
+        laxbreak => 'line breaks should not be checked',
+        nomen    => 'names should be checked',
+        passfail => 'the scan should stop on first error',
+        plusplus => 'increment/decrement should not be allowed',
+        rhino    => 'the Rhino environment globals should be predefined',
+        undef    => 'undefined variables are errors',
+        white    => 'strict whitespace rules apply',
+        widget   => 'the Yahoo Widgets globals should be predefined',
+    );
 }
 
 1;
@@ -168,6 +190,11 @@ Disallow post-increment expressions.
 Report on variables that are undefined when they are first used.
 
 =back
+
+=item jslint_options ( )
+
+Returns a hash of options and their descriptions. Each key is a valid option
+to pass in to jslint().
 
 =back
 
