@@ -13,7 +13,7 @@ use base qw( Exporter );
 our @EXPORT = qw( jslint );
 our @EXPORT_OK = qw( jslint jslint_options );
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 {
     my $ctx;

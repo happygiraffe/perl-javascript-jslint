@@ -1,5 +1,9 @@
 Revision history for Perl extension JavaScript::Lint.
 
+0.06  Sat Apr 28 10:31:06 BST 2007
+    - Update to latest version of JSLint (2007-04-26).  This changes some of
+      the options as well as a few of the outputs.
+
 0.05  Wed Jun  7 14:32:07 BST 2006
     - Import standard Pod tests.  Fix pod accordingly.
     - Don't blow up when we have no errors and jslint returned false.
