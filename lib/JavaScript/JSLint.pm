@@ -51,7 +51,9 @@ sub jslint {
     croak "usage: jslint(js_source)"
       unless defined $js_source;
     my $ctx = _get_context();
-    if ( $ctx->call( 'JSLINT', $js_source, \%opt ) ) {
+    my $ok = $ctx->call( 'JSLINT', $js_source, \%opt );
+    die "$@" if $@;
+    if ( $ok ) {
         return;
     }
     else {
