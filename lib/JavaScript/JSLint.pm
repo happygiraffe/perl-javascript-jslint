@@ -22,7 +22,7 @@ our $VERSION = '0.07';
     sub _get_context {
         unless ( $ctx ) {
             $ctx = JavaScript::Runtime->new()->create_context();
-            $ctx->eval( $jslint_source );
+            $ctx->eval( $jslint_source, "fulljslint.js" );
         }
         return $ctx;
     }
